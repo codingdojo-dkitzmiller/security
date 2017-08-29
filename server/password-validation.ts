@@ -22,3 +22,4 @@ export function validatePassword(password: string) {
 // Get a full list of rules which failed
 // console.log(schema.validate('joke', { list: true }));
 // => [ 'min', 'uppercase', 'digits' ]
+

@@ -11,13 +11,16 @@ import {routesConfig} from "./routes.config";
 import {LessonsService} from "./services/lessons.service";
 import {ReactiveFormsModule} from "@angular/forms";
 
+import {AuthService} from "./services/auth.service";
+
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/shareReplay';
 import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/catch';
 
-import {AuthService} from "./services/auth.service";
-
+import 'rxjs/add/observable/of';
 
 
 @NgModule({

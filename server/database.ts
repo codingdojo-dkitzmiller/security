@@ -4,7 +4,7 @@ import {LESSONS, USERS} from './database-data';
 import {DbUser} from './db-user';
 
 
-class InMemoryDatabase {
+export class InMemoryDatabase {
 
     userCounter = 0;
 
@@ -12,11 +12,16 @@ class InMemoryDatabase {
         return _.values(LESSONS);
     }
 
-
     createUser(email: string, passwordDigest: string) {
 
-        this.userCounter++;
+        const usersPerEmail = _.keyBy( _.values(USERS), 'email' );
+        if (usersPerEmail[email]) {
+            const message = 'An user already exists with email ' + email;
+            console.error(message);
+            throw new Error(message);
+        }
 
+        this.userCounter++;
         const id = this.userCounter;
 
         const user: DbUser = {
@@ -26,11 +31,17 @@ class InMemoryDatabase {
         };
 
         USERS[id] = user;
-
+        console.log(USERS);
         return user;
+    }
 
+    findUserByEmail(email: string): DbUser {
+        const users = _.values(USERS);
+        return _.find(users, user => user.email === email);
     }
 
 }
 
 export const db = new InMemoryDatabase();
+
+
