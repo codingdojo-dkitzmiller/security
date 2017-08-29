@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {LessonsService} from "../services/lessons.service";
-import {Observable} from "rxjs/Observable";
-import {Lesson} from "../model/lesson";
-import {AuthService} from "../services/auth.service";
+import {LessonsService} from '../services/lessons.service';
+import {Observable} from 'rxjs/Observable';
+import {Lesson} from '../model/lesson';
+import {AuthService} from '../services/auth.service';
 
 @Component({
     selector: 'lessons',
