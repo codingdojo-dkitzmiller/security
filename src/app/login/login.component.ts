@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'login',
@@ -8,13 +8,19 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 })
 export class LoginComponent implements OnInit {
 
-    form:FormGroup;
+    form: FormGroup;
 
-    constructor(private fb:FormBuilder) {
+    messagePerErrorCode: {
+        loginfailed: 'Invalid credentials'
+    };
+
+    errors: string[] = [];
+
+    constructor(private fb: FormBuilder) {
 
         this.form = this.fb.group({
-            email: ['',Validators.required],
-            password: ['',Validators.required]
+            email: ['test@gmail.com', Validators.required],
+            password: ['Password10', Validators.required]
         });
 
     }
@@ -28,7 +34,7 @@ export class LoginComponent implements OnInit {
 
         const formValue = this.form.value;
 
-        //TODO
+        // TODO
 
 
     }
