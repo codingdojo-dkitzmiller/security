@@ -1,25 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../services/auth.service";
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../services/auth.service';
 
 @Component({
-  selector: 'signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css', '../common/forms.css']
+    selector: 'signup',
+    templateUrl: './signup.component.html',
+    styleUrls: ['./signup.component.css', '../common/forms.css']
 })
 export class SignupComponent implements OnInit {
 
-    form:FormGroup;
+    form: FormGroup;
+    errors: string[] = [];
+    messagePerErrorCode = {
+       min: 'The minimum length is 10 characters',
+        uppercase: 'At least one upper case character',
+        digits: 'At least one numeric character'
+    }
 
     constructor(private fb: FormBuilder, private authService: AuthService) {
 
         this.form = this.fb.group({
-            email: ['',Validators.required],
-            password: ['',Validators.required],
-            confirm: ['',Validators.required]
+            email: ['', Validators.required],
+            password: ['', Validators.required],
+            confirm: ['', Validators.required]
         });
-
-
     }
 
     ngOnInit() {
@@ -34,8 +38,11 @@ export class SignupComponent implements OnInit {
 
             this.authService.signUp(val.email, val.password)
                 .subscribe(
-                    () => console.log("User created successfully"),
-                    console.error
+                    // next
+                    () => console.log('User created successfully'),
+
+                    // error
+                    response => this.errors = response.error.errors
                 );
 
         }
